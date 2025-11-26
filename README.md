@@ -1,4 +1,4 @@
-# 🚦 Traffic Light Controller using Verilog (Vivado)
+#  Traffic Light Controller using Verilog (Vivado)
 
 This project implements a **Traffic Light Controller FSM** using Verilog HDL.
 The design simulates a **4-state traffic flow** between the **North-South** and **East-West** directions with configurable timings for green and yellow lights.
@@ -12,7 +12,7 @@ The controller is tested using a **Verilog testbench** in **Vivado Simulator** a
   * Green duration
   * Yellow duration
   * Parameterized clock frequency
-* 🚦 **4-State FSM**
+*  **4-State FSM**
 
   * NS Green
   * NS Yellow
@@ -68,7 +68,7 @@ traffic-light-controller/
 
 ---
 
-## 🛠 Verilog Implementation
+##  Verilog Implementation
 
 ### **Top Module: `traffic_light_controller.v`**
 
@@ -89,9 +89,6 @@ Includes:
 * Prints waveform transitions
   
    ```
-
----
-
 ##  Expected Waveform Output
 
 * NS Green should stay ON for configured green time
@@ -134,4 +131,3 @@ Feel free to fork the repo and improve:
 Sakshi Pandey
 sakshipan14@gmail.com
 
-Just tell me!
