@@ -1,98 +1,137 @@
-# Traffic_light_controller
--
+# 🚦 Traffic Light Controller using Verilog (Vivado)
 
-# **Traffic Light Controller Project (FSM)**
+This project implements a **Traffic Light Controller FSM** using Verilog HDL.
+The design simulates a **4-state traffic flow** between the **North-South** and **East-West** directions with configurable timings for green and yellow lights.
 
-## **Project Overview**
+The controller is tested using a **Verilog testbench** in **Vivado Simulator** and verified using **RTL schematic** and waveforms.
 
-The Traffic Light Controller project demonstrates the design of a digital traffic light system using a **Finite State Machine (FSM)** and counters to control the duration of each light state. The system cycles through **Green → Yellow → Red → Green** continuously, ensuring safe and efficient traffic flow.
+## Features
 
-The project is implemented in **Verilog HDL** and can be simulated or synthesized on an FPGA for practical applications.
+*  **Configurable timing**
+
+  * Green duration
+  * Yellow duration
+  * Parameterized clock frequency
+* 🚦 **4-State FSM**
+
+  * NS Green
+  * NS Yellow
+  * EW Green
+  * EW Yellow
+* Clean synchronous FSM implementation
+* Complete testbench included
+*  Verified on **Vivado 2020+**
+* RTL schematic + waveform simulation
 
 ---
 
-## **Features**
-
-* 3-state FSM: Green, Yellow, Red.
-* Counter-based timing for each light state.
-* Moore machine outputs: light outputs depend only on the current state.
-* Easily extendable to multiple intersections, pedestrian signals, or emergency vehicle priority.
-* FPGA-synthesizable design.
-
----
-
-## **FSM State Diagram**
+## FSM State Diagram
 
 ```
-          +-----------+
-          |   GREEN   |
-          | Duration: |
-          |   N sec   |
-          +-----------+
-                |
-                v
-          +-----------+
-          |  YELLOW   |
-          | Duration: |
-          |   M sec   |
-          +-----------+
-                |
-                v
-          +-----------+
-          |    RED    |
-          | Duration: |
-          |   P sec   |
-          +-----------+
-                |
-                v
-             (Back to GREEN)
+        ┌──────────────┐
+        │  NS GREEN    │
+        └──────┬───────┘
+               │
+               ▼
+        ┌──────────────┐
+        │ NS YELLOW     │
+        └──────┬────────┘
+               │
+               ▼
+        ┌──────────────┐
+        │  EW GREEN     │
+        └──────┬────────┘
+               │
+               ▼
+        ┌──────────────┐
+        │ EW YELLOW     │
+        └──────┬────────┘
+               │
+               ▼
+           Back to NS GREEN
 ```
 
-* **GREEN:** Vehicles can move.
-* **YELLOW:** Vehicles prepare to stop.
-* **RED:** Vehicles must stop.
+---
+
+##  Project Structure
+
+```
+traffic-light-controller/
+│
+├── src/
+│   ├── traffic_light_controller.v
+│   └── tb_traffic_light.v
+│
+├── README.md
+└── vivado_project_files/
+```
 
 ---
 
-## **Implementation Details**
+## 🛠 Verilog Implementation
 
-* **Module Name:** `traffic_light_fsm`
-* **Inputs:**
+### **Top Module: `traffic_light_controller.v`**
 
-  * `clk` : System clock.
-  * `rst_n` : Active-low synchronous reset.
-* **Outputs:**
+Implements:
 
-  * `green` : Green light signal.
-  * `yellow` : Yellow light signal.
-  * `red` : Red light signal.
-* **FSM Logic:**
+* FSM
+* State transitions
+* One-second timer using clock frequency
+* Traffic signal output control
 
-  * The FSM transitions from GREEN → YELLOW → RED → GREEN.
-  * Each state uses a **counter** to maintain its duration.
-  * Outputs are based solely on the current state (Moore machine).
+### **Testbench: `tb_traffic_light.v`**
 
----
+Includes:
 
-## **How to Run**
-
-1. Open the project in **Quartus Prime** or your preferred Verilog simulator.
-2. Set `traffic_light_fsm` as the top-level entity.
-3. Simulate the design using the testbench `tb_traffic_light_fsm.v`.
-4. Observe the outputs `green`, `yellow`, `red` to verify the correct sequence.
+* Clock generation
+* Reset logic
+* Simulation runtime
+* Prints waveform transitions
+  
+   ```
 
 ---
 
-## **Files Included**
+##  Expected Waveform Output
 
-* `traffic_light_fsm.v` – Main Verilog module implementing FSM.
-* `tb_traffic_light_fsm.v` – Testbench for simulation.
-* `README.md` – Project description and instructions.
+* NS Green should stay ON for configured green time
+* Then NS Yellow
+* Then EW Green
+* Then EW Yellow
+* Repeats continuously
 
 ---
 
-## **Applications**
+## Parameters You Can Modify
 
-* Urban traffic management systems.
-* Pedestrian and vehicle signal coordination.
-* Embedded system learning and FPGA projects.
+| Parameter       | Description        | Example    |
+| --------------- | ------------------ | ---------- |
+| `CLOCK_FREQ_HZ` | Clock freq in Hz   | `50000000` |
+| `GREEN_TIME_S`  | Green time in sec  | `10`       |
+| `YELLOW_TIME_S` | Yellow time in sec | `3`        |
+
+---
+
+##  Tools Used
+
+* **Verilog HDL**
+* **Xilinx Vivado** (any version 2020+)
+* **Vivado Simulator**
+
+---
+
+## Contribution
+
+Feel free to fork the repo and improve:
+
+* Adding pedestrian signals
+* Adding timer displays
+* Implementing emergency vehicle priority
+* 4-way adaptive traffic control
+
+---
+## Author
+Sakshi Pandey
+sakshipan14@gmail.com
+
+Just tell me!
