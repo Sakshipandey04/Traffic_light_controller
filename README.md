@@ -87,7 +87,6 @@ Includes:
 * Reset logic
 * Simulation runtime
 * Prints waveform transitions
-  
    ```
 ##  Expected Waveform Output
 
